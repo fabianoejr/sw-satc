@@ -16,7 +16,7 @@
                 </div>
                 <div class="container-content">
                     <section>
-                        <div class="bg">
+                        <div id="bgPrincipal" class="bg">
                             <div class="attendant">
                                 <span>Atendente diz:</span>
                                 <div class="at-chat">
@@ -52,13 +52,55 @@
                         </div>
                     </section>
                     <div class="textbox">
-                        <input type="text" placeholder=" Digite sua mensagem..." />
-                        <button class="button" type="button">Enviar</button>
+                        <input type="text" id="mensagem" placeholder=" Digite sua mensagem..." />
+                        <button type="button" class="button" id="btn" onclick="addMsg()">Enviar</button>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    <script>
+
+            function addMsg() {
+            /* Captura a mensagem do campo texto */
+            const novaMsg = document.getElementById("mensagem");
+
+            /* Cria todas as divs que irão compor a estrutura da mensagem, bem como os spans referente a
+               Cada um */
+            const pDiv = document.createElement("div");
+            const sDiv = document.createElement("div");
+            const tDiv = document.createElement("div");
+            const pSpan = document.createElement("span");
+            const qDiv = document.createElement("div");
+            const sSpan = document.createElement("span");
+
+            /* Seta as classes das divs */
+            pDiv.setAttribute("class", "usermessage");
+            sDiv.setAttribute("class", "message");
+            tDiv.setAttribute("class", "person-send");
+            qDiv.setAttribute("class", "at-chat");
+                        
+            /* Adiciona o título 'Você Diz' a cada mensagem, bem como faz o append adicionando o
+               span e incrementando a div secundária */
+            pSpan.innerText = "Você diz:";
+            tDiv.append(pSpan);
+            sDiv.append(tDiv);
+
+            /* Incrementa ao segundo span a mensagem capturada da caixa de texto e termina de dar os appends*/
+            sSpan.innerText = novaMsg.value;
+            qDiv.append(sSpan);
+            sDiv.append(qDiv);
+            pDiv.appendChild(sDiv);
+
+            /* Cria a div com a mensagem */
+            const bgPrincipal = document.getElementById("bgPrincipal");
+            bgPrincipal.appendChild(pDiv);
+
+            novaMsg.value = "";
+            novaMsg.focus();
+        }
+
+    </script>
 </body>
 
 </html>
